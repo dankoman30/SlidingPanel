@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="WpfApp2.Views.CardControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             mc:Ignorable="d" 
+             d:DesignHeight="80" d:DesignWidth="300">
+
+    <UserControl.Resources>
+        <Style x:Key="IconButton" TargetType="Button">
+            <Setter Property="Background" Value="#343A46"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="0"
+                                CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center"
+                                              Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Border BorderBrush="#343A46" BorderThickness="1" CornerRadius="5" Padding="10" Background="#343A46">
+        <Grid Background="#343A46">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <iconPacks:PackIconMaterial 
+                Kind="{Binding CardModel.IconKind,FallbackValue='Account'}"
+                Width="24"
+                Height="24"
+                VerticalAlignment="Center"
+                Margin="20 0 0 0"
+                Foreground="White"/>
+
+            <StackPanel Grid.Column="1" Margin="20,0" VerticalAlignment="Center">
+                <TextBlock Text="{Binding CardModel.Title, FallbackValue='Hello World'}" FontWeight="Bold" Foreground="White" Margin="0 0 0 10"/>
+                <TextBlock Text="{Binding CardModel.Description, FallbackValue='Hello World'}" TextWrapping="Wrap" Foreground="White"/>
+            </StackPanel>
+
+            <Button Grid.Column="2" Command="{Binding NavigateCommand}" 
+                    Style="{StaticResource IconButton}" HorizontalAlignment="Left">
+                <iconPacks:PackIconMaterial Kind="ChevronRight" Width="16" Height="16"/>
+            </Button>
+        </Grid>
+    </Border>
+</UserControl>
